@@ -13,7 +13,8 @@ var arrayFinal = [{
     nameItem: 'none',
     quantities: 0,
     pricing: 0
-}]
+}];
+var arrayCopy;
 
 
 
@@ -48,15 +49,17 @@ submit1.addEventListener('click', (e) => {
         var price2 = arrayItems[loc].pricing;
         change.innerHTML = `Name: ${name}</br>Price: $${price2}</br>Quantity: ${quant2}`;
     };
+    arrayCopy = JSON.parse(JSON.stringify(arrayItems));
     regItem.reset();
-})
-
+});
 
 
 items.addEventListener('click', (e) => {
     var itemNumber = parseInt(e.target.id.replace(/[A-Za-z$-]/g, ""), 10);
-    var name = arrayItems[itemNumber].nameItem;
+    var name = arrayCopy[itemNumber].nameItem;
     var repeat = false;
+    var origPrice = arrayItems[itemNumber].pricing;
+    var origArray = arrayItems[itemNumber];
     var total = document.getElementById('total');
     var arrayTotal = [];
     for(let i = 0; i < arrayFinal.length; i++){
@@ -67,28 +70,33 @@ items.addEventListener('click', (e) => {
     };
 
     if (!repeat){
-        arrayFinal.push(arrayItems[itemNumber]);
+        arrayFinal.push(arrayCopy[itemNumber]);
         var object = arrayFinal[itemNumber];
         object.quantities = 1;
         checkout.innerHTML += `<div id="itemReceipt${itemNumber}">${object.nameItem}, ${object.quantities}, $${object.pricing}</div>`
     } else {
+        if(origArray.quantities !== 0){
         var object = arrayFinal[itemNumber];
         object.quantities += 1;
-        var origPrice = arrayItems[itemNumber].pricing;
         var newPrice =  object.quantities * origPrice;
         object.pricing = newPrice;
-        console.log(arrayItems[itemNumber].pricing);
         var change = document.getElementById(`itemReceipt${itemNumber}`);
+        var change2 = document.getElementById(`itemList${itemNumber}`);
+        origArray.quantities -= 1;
         change.innerHTML = `${object.nameItem}, ${object.quantities}, $${object.pricing}`;
-        console.log(arrayFinal);
+        change2.innerHTML = `Name: ${origArray.nameItem}</br>Price: $${origArray.pricing}</br>Quantity: ${origArray.quantities}`;
+        console.log(arrayItems);
+        } else {
+            
+        }
     };
+
 
     for (let i = 0; i < arrayFinal.length; i++){
         arrayTotal.push(arrayFinal[i].pricing);
     }
     var lastPrice = arrayTotal.reduce((total, amount) => total + amount, 0);
     total.innerHTML = `Total: ${lastPrice}`;
-    console.log(arrayTotal);
 
 });
 

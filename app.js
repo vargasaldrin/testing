@@ -21,11 +21,7 @@ var arrayCopy;
 submit1.addEventListener('click', (e) => {
     event.preventDefault();
     var name = document.getElementById('prodname').value;
-<<<<<<< HEAD
     var price = parseFloat(document.getElementById('price').value).toFixed(2);
-=======
-    var price = parseInt(document.getElementById('price').value);
->>>>>>> e260da0d200f1e697940dfb20cedc49c1afda2e6
     var quantity = parseInt(document.getElementById('quantity').value);
     var repeat = false;
 
@@ -43,11 +39,7 @@ submit1.addEventListener('click', (e) => {
         }
         arrayItems.push(item);
         var loc = arrayItems.findIndex(x => x.nameItem.toLowerCase() == name.toLowerCase());
-<<<<<<< HEAD
         items.innerHTML += `<div id="itemList${loc}" class="lists">Name: ${name}</br>Price: $${price}</br>Quantity: ${quantity}</div>`;
-=======
-        items.innerHTML += `<div id="itemList${loc}">Name: ${name}</br>Price: $${price}</br>Quantity: ${quantity}</div>`;
->>>>>>> e260da0d200f1e697940dfb20cedc49c1afda2e6
     } else {
         var loc = arrayItems.findIndex(x => x.nameItem.toLowerCase() == name.toLowerCase());
         var change = document.getElementById(`itemList${loc}`);
@@ -68,11 +60,9 @@ items.addEventListener('click', (e) => {
     var repeat = false;
     var origPrice = arrayItems[itemNumber].pricing;
     var origArray = arrayItems[itemNumber];
-<<<<<<< HEAD
     var change = document.getElementById(`itemReceipt${itemNumber}`);
     var change2 = document.getElementById(`itemList${itemNumber}`);
-=======
->>>>>>> e260da0d200f1e697940dfb20cedc49c1afda2e6
+
     var total = document.getElementById('total');
     var arrayTotal = [];
     for(let i = 0; i < arrayFinal.length; i++){
@@ -86,11 +76,8 @@ items.addEventListener('click', (e) => {
         arrayFinal.push(arrayCopy[itemNumber]);
         var object = arrayFinal[itemNumber];
         object.quantities = 1;
-<<<<<<< HEAD
         origArray.quantities -= 1;
         change2.innerHTML = `Name: ${origArray.nameItem}</br>Price: $${origArray.pricing}</br>Quantity: ${origArray.quantities}`;
-=======
->>>>>>> e260da0d200f1e697940dfb20cedc49c1afda2e6
         checkout.innerHTML += `<div id="itemReceipt${itemNumber}">${object.nameItem}, ${object.quantities}, $${object.pricing}</div>`
     } else {
         if(origArray.quantities !== 0){
@@ -98,21 +85,11 @@ items.addEventListener('click', (e) => {
         object.quantities += 1;
         var newPrice =  object.quantities * origPrice;
         object.pricing = newPrice;
-<<<<<<< HEAD
-=======
-        var change = document.getElementById(`itemReceipt${itemNumber}`);
-        var change2 = document.getElementById(`itemList${itemNumber}`);
->>>>>>> e260da0d200f1e697940dfb20cedc49c1afda2e6
         origArray.quantities -= 1;
         change.innerHTML = `${object.nameItem}, ${object.quantities}, $${object.pricing}`;
         change2.innerHTML = `Name: ${origArray.nameItem}</br>Price: $${origArray.pricing}</br>Quantity: ${origArray.quantities}`;
         console.log(arrayItems);
         } else {
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> e260da0d200f1e697940dfb20cedc49c1afda2e6
         }
     };
 
@@ -121,12 +98,7 @@ items.addEventListener('click', (e) => {
         arrayTotal.push(arrayFinal[i].pricing);
     }
     var lastPrice = arrayTotal.reduce((total, amount) => total + amount, 0);
-<<<<<<< HEAD
-    total.innerHTML = `Total: $${lastPrice}`;
-    document.getElementById('submit2').style.display = 'block'
-=======
     total.innerHTML = `Total: ${lastPrice}`;
->>>>>>> e260da0d200f1e697940dfb20cedc49c1afda2e6
 
 });
 
